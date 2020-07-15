@@ -8,9 +8,10 @@ typedef unsigned long ll;
 //問題条件
 double r = 1.2;
 double lambda = 0.5;
-//todo ここのgammaとbetaはどんな値がいいのかよくわかっていない
-double gamma = 0.2;
+//todo ここのgammaとbeta, alphaはどんな値がいいのかよくわかっていない
+double alpha = 0.2;
 double beta = 0.2;
+double gamma = 0.2;
 //data importによって変化
 ll N;
 ll TimeCount;
@@ -18,14 +19,17 @@ MatrixXd covariance;
 VectorXd exReturn, x, epsilons, deltas;
 vector<VectorXd> data;
 
-void modifyBasedOnData() {
+// void modifyBasedOnData() {
 
-}
+// }
+
+// double energyFunction() {
+
+// }
 void train() {
     //todo 現状bを考慮できていないプログラムになっている。
     VectorXd y = exReturn * covariance;
-    x = epsilons + (deltas - epsilons) / (VectorXd::Ones(N) + -1 * beta * (y - gamma));
-    modifyBasedOnData();
+    x = (1 - alpha) * x + alpha * (epsilons + (deltas - epsilons) / (VectorXd::Ones(N) + -1 * beta * (y - gamma)));
 }
 vector ReadCsv() {
     vector<VectorXd> data;
