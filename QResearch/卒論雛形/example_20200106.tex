@@ -1,0 +1,91 @@
+\documentclass[a4j,twocolumn]{jarticle}
+%\usepackage[dvipdfm]{graphicx} 
+\usepackage[dvipdfmx]{graphicx} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\setlength{\columnseprule}{0pt} 
+\setlength{\columnsep}{2zw} 
+\setlength{\textheight}{26cm} 
+\setlength{\topmargin}{-2.5cm} 
+\setlength{\textwidth}{17.2cm} 
+\setlength{\oddsidemargin}{-0.6cm} 
+%\setlength{\columnseprule}{0pt}
+%\setlength{\columnsep}{2zw}
+%\setlength{\leftmargin}{10pt}
+\pagestyle{empty}
+
+\begin{document}
+\newcommand{\vv}[1]{\mbox{\boldmath{$#1$}}}
+\def\e{{\rm e}}
+\topmargin -2.5cm
+\textheight 26cm
+%\textheight 25.5cm
+\raggedbottom
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\twocolumn[\
+\begin{center}
+{\Large {\bf 共役勾配法によるSchr\"odinger  方程式の解法 }}
+\end{center}
+\begin{flushright}
+凝縮系物理学研究室~~A1577143~上原隆寛
+\end{flushright}
+]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{はじめに}
+本研究では、共役勾配法を用いたSchr\"odinger  方程式の解法について説明する。
+
+\vspace{-3mm}
+\section{共役勾配法}
+最急勾配降下法が代表するように、ある関数$f$の極小値を求める時、ある一点を与え、その点での勾配方向の極小値を求める操作を
+繰り返す事により、その関数の極小値を求める事ができる。しかしこの方法では似た方向での極小値探索を繰り返してしまう非効率な場合が多く存在する。
+共役勾配法は、古い更新で用いた勾配に対して共役な方向で更新を行うことによって、少ない回数で極小値に達することができる方法である。
+特に、$f$が2次形式の場合は有限回の更新で真の極小点に到達できる事が示される。
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-6mm}
+\section{$\langle H \rangle$ の極小化}
+今、解くべき方程式を
+\begin{displaymath}
+H|\psi\rangle = E|\psi\rangle
+\end{displaymath}
+とすると、$\psi$を離散化して$\vec{\psi}$ = $(\psi_1, \psi_2, ...)^T$とすることで
+\begin{displaymath}
+F\vec{\psi}(x) = \frac{\vec{\psi}H\vec{\psi}}{\vec{\psi}\vec{\psi}} = \frac{h\sum_{ij}\psi_i H_ij \psi_j}{h\sum_{i}\psi_i\psi_i}
+\end{displaymath}
+を極小化する$\vec{\psi}$が求める固有ベクトルであり、この時の$F\vec{\psi}$が対応する固有値になっている。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5mm}
+\section{考察}
+3次元のSchr\"odinger  方程式を、共役勾配法を用いてHamiltonianの極小化を行い解いた結果は次のグラフのようになる。
+したがって、3次元のSchr\"odinger  方程式が共役勾配法によって解く事ができていることがわかる。
+\vspace{-3.0mm}
+\begin{figure}[h]
+\includegraphics[scale=1]{0.eps}
+\caption{初期状態は0.01を均等に配置した。}
+\end{figure}
+
+\vspace{-3.0mm}
+\begin{figure}[h]
+\includegraphics[scale=1]{10.eps}
+\caption{10回目の時点で中心近くの値が大きくなっていっている事がわかる。}
+\end{figure}
+
+\vspace{-3.0mm}
+\begin{figure}[h]
+\includegraphics[scale=1]{30.eps}
+\caption{30回目の時点では、(0, 0, 0)を中心に、なだらかに値が広がっている様子がわかる。}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-7mm}
+\section{まとめ}
+本研究ではSchr\"odinger  方程式を共役勾配降下法を用いてHamiltonianの極小化を行い、解く事ができる事を示した。
+\end{document}
+

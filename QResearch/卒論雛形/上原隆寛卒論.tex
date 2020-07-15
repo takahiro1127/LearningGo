@@ -1,0 +1,142 @@
+\documentclass[a4j,twocolumn]{jarticle}
+%\usepackage[dvipdfm]{graphicx} 
+\usepackage[dvipdfmx]{graphicx} 
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{type1cm}
+\usepackage{amsfonts}
+\setlength{\columnseprule}{0pt} 
+\setlength{\columnsep}{2zw} 
+\setlength{\textheight}{26cm} 
+\setlength{\topmargin}{-2.5cm} 
+\setlength{\textwidth}{17.2cm} 
+\setlength{\oddsidemargin}{-0.6cm} 
+%\setlength{\columnseprule}{0pt}
+%\setlength{\columnsep}{2zw}
+%\setlength{\leftmargin}{10pt}
+\pagestyle{empty}
+
+\begin{document}
+\newcommand{\vv}[1]{\mbox{\boldmath{$#1$}}}
+\def\e{{\rm e}}
+\topmargin -2.5cm
+\textheight 26cm
+%\textheight 25.5cm
+\raggedbottom
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\twocolumn[\
+\begin{center}
+{\Large {\bf 共役勾配法によるSchr\"odinger  方程式の解法 }}
+\end{center}
+\begin{flushright}
+凝縮系物理学研究室~~A1577143~上原隆寛
+\end{flushright}
+]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{はじめに}
+本研究では、共役勾配法を用いたSchr\"odinger  方程式の解法について説明する。
+
+\vspace{-3mm}
+\section{共役勾配法}
+ある関数$f(x)$の極小値を求める時、ある一点を与え、その点での勾配方向を探索方向として極小値を求める操作を
+繰り返す事により、その関数の極小値を求める事ができる。これは最急降下法と呼ばれ、そのアルゴリズムは
+\begin{displaymath}
+x_{k+1} = x_k-c_kr_k,~~r_k = \mathrm{grad}f(x_k)
+\end{displaymath}
+と表され、第$k$ステップでは$r_k$方向に極小値を探索して$c_k$を決めていく事になる。
+しかし、この方法では似た方向での極小値探索を繰り返してしまう非効率な場合が多く存在する。
+これに対し、共役勾配法は、古い探索で用いた勾配に対して共役な方向で探索を行うことによって、少ない探索回数で極小値に達することができる方法である。
+ここで、最急降下法の探索方向を$r_k$とした時に、共役勾配法の探索方向$p_k$は
+\begin{displaymath}
+p_{k+1} = r_{k+1} - \beta_kp_k
+\end{displaymath}
+のように表すことができ、これを共役勾配の方向と呼ぶ。
+特に、$f(x)$が2次形式の場合は有限回の更新で真の極小点に到達できる事が示される。
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-6mm}
+\section{$\langle H \rangle$ の極小化}
+今、解くべきSchr\"odinger方程式を
+\begin{displaymath}
+H\psi(x) = E\psi(x)
+\end{displaymath}
+とすると、基底状態$\psi(x)$は汎関数
+\begin{displaymath}
+F[\psi] = \frac{\langle\psi|H|\psi\rangle}{\langle\psi|\psi\rangle}
+\end{displaymath}
+を極小化する事により求める事ができる。
+1次元での問題を例にとると、空間をメッシュ間隔$h$で離散化して各点$x_i$での$\psi$の値$\psi_i=\psi(x_i)$を使って、$\psi$をベクトル$\vec{\psi}$ = $(\psi_1, \psi_2, ...)^T$と表現する事で、$F[\psi]$を
+\begin{displaymath}
+F(\vec{\psi}) = \frac{h\sum_{ij}\psi_i H_{ij} \psi_j}{h\sum_{i}\psi_i\psi_i}
+\end{displaymath}
+としてベクトル$\vec{\psi}$の関数として表す事ができる。この$F(\vec{\psi})$を極小化する事により、基底状態を表す$\vec{\psi}$が求められ、この時の$F(\vec{\psi})$が対応する基底状態のエネルギーになっている。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-5mm}
+\section{調和振動子を用いた検証}
+ここでは3次元のSchr\"odinger  方程式
+\begin{displaymath}
+\left(-\frac{1}{2}\nabla^2 + \frac{1}{2}r^2
+\right)\psi(\mbox{\boldmath{$r$}}) = E\psi(\mbox{\boldmath{$r$}})
+\end{displaymath}
+を、上に示した共役勾配法を用いて解いた。
+用いた空間は$-3 \leqq x, y, z, \leqq 3$であり、メッシュ間隔は$h$=0.5とした。
+図1は共役勾配法のステップ数$n$が各々1, 10, 30での$\psi(\mbox{\boldmath{$r$}})$を表している。
+第1ステップ$(n=1)$では$\psi(\mbox{\boldmath{$r$}})$として全空間で一様なものを採用した。
+共役勾配方向の探索を10回繰り返した図$(n=10)$では$\psi(\mbox{\boldmath{$r$}})$は原点近くに極大値を持つ形になっているのがわかる。
+30回目の探索を行なった後の$\psi(\mbox{\boldmath{$r$}})$は図$(n=30)$に示す様にほぼ真の解に一致している。
+これは$F(\vec{\psi})$の極小化を行う空間の次元が$13^3$である事を考えると、共役勾配法の効率が極めて高いことを示している。
+実際、最急降下法で図$(n=30)$と同程度の制度で$\psi(\mbox{\boldmath{$r$}})$を求めようとすると110回程度の探索が必要であった。
+\begin{figure}[h]
+$n=1$
+\vspace{-3mm}
+\begin{center}
+\includegraphics[scale=0.25]{0.eps}
+\end{center}
+\end{figure}
+\vspace{-7mm}
+\begin{figure}[h]
+$n=10$
+\vspace{-3mm}
+\begin{center}
+\includegraphics[scale=0.15]{10.eps}
+\end{center}
+\end{figure}
+\vspace{-7mm}
+\begin{figure}[h]
+$n=30$
+\vspace{-3mm}
+\begin{center}
+\includegraphics[scale=0.25]{30.eps}
+\end{center}
+\end{figure}
+
+図１.共役勾配法での第$n$ステップでの$\psi(\mbox{\boldmath{$r$}})$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-7mm}
+\section{まとめ}
+本研究ではSchr\"odinger  方程式を共役勾配法を用いて解く方法を紹介した。
+この方法はどの様な形のポテンシャルに対しても適用可能な為、大きな汎用性を持っていることが示せた。
+
+
+memo
+最急勾配法の更新方向に対して、共役な方向に修正している。pkはk回分の情報を含んでいるため、k回の探索でk次元を全探索した事に等しくなる。(よってn次元の探索はn回以内で終了する)
+$x_1 x_2 r_1x_3x_4x_5x_6x_7x_8p_1$
+\begin{displaymath}
+f(x) = \frac{x^TAx}{x^Tx}
+\end{displaymath}
+\begin{displaymath}
+Ax = \lambda x
+\end{displaymath}
+\begin{displaymath}
+V(x, y, z) = \frac{1}{2}(x^2 + y^2 + z^2) + (x - 1)^2(y - 1)^4
+\end{displaymath}
+\end{document}
