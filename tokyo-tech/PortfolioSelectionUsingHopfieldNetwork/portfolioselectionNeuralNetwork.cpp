@@ -26,11 +26,16 @@ vector<VectorXd> data;
 // double energyFunction() {
 
 // }
-void train() {
+void cycle() {
     //todo 現状bを考慮できていないプログラムになっている。
     VectorXd y = exReturn * covariance;
     x = (1 - alpha) * x + alpha * (epsilons + (deltas - epsilons) / (VectorXd::Ones(N) + -1 * beta * (y - gamma)));
 }
+
+void solve() {
+    rep(i, 100) cycle();
+}
+
 vector ReadCsv() {
     vector<VectorXd> data;
     // data = getFromCsv();
@@ -58,7 +63,7 @@ void importDate() {
 }
 int main() {
     importData();
-    rep(i, TimeCount) train();
+    rep(i, TimeCount) solve();
     //todo 別fileに書き込むなどする。
     cout << x << endl;
 }
