@@ -7,7 +7,16 @@
     "deque": "cpp",
     "string": "cpp",
     "vector": "cpp",
-    "string_view": "cpp"
+    "string_view": "cpp",
+    "stack": "cpp",
+    "map": "cpp",
+    "array": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "initializer_list": "cpp",
+    "regex": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
