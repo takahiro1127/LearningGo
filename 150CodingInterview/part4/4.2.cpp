@@ -82,4 +82,6 @@ int main() {
     bt.push(23);
     bt.push(2);
     cout << (*(*(bt.right)).right).value << endl;
+    cout << (*(*(bt.left)).right).value << endl;
+    cout << (*(*(bt.left)).left).value << endl;
 }

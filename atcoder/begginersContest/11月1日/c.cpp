@@ -31,6 +31,8 @@ bool onLine(int x, int y, int xj, int yj) {
     }
 }
 
+// 傾きで判断できる！！！！！！
+
 bool onLine(int x, int y, int xi, int yi, int xj, int yj) {
     if (x <= xi && x <= xj) {
         return onLine(xi - x, yi - y, xj - x, yj - y);
