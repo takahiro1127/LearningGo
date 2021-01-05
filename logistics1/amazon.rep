@@ -1,0 +1,46 @@
+###
+###    AMPL Model: Distribution Problem for eCommerce
+###
+
+### 割当結果の整理とルート番号
+
+# 初期化
+for {i in JP_Sites} {
+   let SC_Flag   [i] := 0;
+   let Assign_SC [i] := 0;
+   let Route_No  [i] := 0;
+   };
+
+let Sel_Routes := {};
+let Sel_SC     := {};
+
+# 選択されたルートを集める
+for {j in Routes: X[j] = 1} {
+   let SC_Flag[Route_SC[j]] := 1;                # SCフラグ(SCに選ばれたどうか)
+   let Assign_SC[Route_SC[j]] := Route_SC[j];    # 自身の割当SC
+   let Sel_Routes := Sel_Routes union {j};       # 選ばれたルートに含まれるJPサイトの集合
+   let Sel_SC     := Sel_SC union {Route_SC[j]}; # 選ばれたSCの集合
+   };
+
+# 割当SCと、ルート番号を取得する
+for {i in Sel_SC} {           #  SC サイトのみ
+   let n := 1;                                  # ルート番号初期化
+   for {j in Sel_Routes: i = Route_SC[j]} {     # 当該SCのルートに対して
+      for {k in Route_Sites[j]: k != i} {       # ルート内のJPサイト
+         let Assign_SC [k] := i;
+         let Route_No  [k] := n;
+         };
+      let n := n + 1;
+      };
+   };
+
+### 結果の出力
+printf "SCフラグ,割当SC,ルート番号,\n"                                > Amazon.csv;
+for {i in JP_Sites} 
+   printf "%d,%d,%d,\n", SC_Flag[i], Assign_SC[i], Route_No[i]       >> Amazon.csv;
+
+print "全部で" & card(Sel_SC) & "個のSCと、" & card(Sel_Routes) & "個のルートが選択されました。";
+
+   
+
+

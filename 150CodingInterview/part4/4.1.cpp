@@ -26,8 +26,7 @@ public:
         return children.find(node.name) != children.end();
     }
 
-    int countChildren()
-    {
+    int countChildren() {
         return children.size();
     }
 };
