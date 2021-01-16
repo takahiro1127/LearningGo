@@ -1,6 +1,0 @@
-option DOSEXES 'soptampl';
-option solver soptampl;
-option display_eps 0.001;
-option omit_zero_cols 1;
-option display_round 1;
-option omit_zero_rows 1;
