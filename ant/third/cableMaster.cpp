@@ -24,6 +24,7 @@ int main() {
     solve();
 }
 
+// 
 bool C(double x) {
     int sum = 0;
     for (int i = 0; i < n; i++) {
@@ -32,17 +33,22 @@ bool C(double x) {
     return (sum >= k);
 }
 
+// 二分探索
 void solve() {
     double max, min;
     max = 100;
     min = 0;
-    for (int i = 0; i < 100; i++) {
+    // 何回二分探索を行うか
+    int max_search_count = 5;
+    for (int i = 0; i < max_search_count; i++) {
         if (C((min+max)/2)) {
+            // Cの決め方は人それぞれ
             min = (max + min)/2;
         } else {
             max = (max + min)/2;
         }
     }
+    // 二分探索の答え
     cout << (min+max)/2 << endl;
 }
 

@@ -27,5 +27,4 @@ bool solve(int i, int m) {
         return false;
     }
     return solve(i + 1, m) || solve(i + 1, m - A[i]);
-    
 }
