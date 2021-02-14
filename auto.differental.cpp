@@ -150,4 +150,8 @@ int main() {
     Node x_16(x_val);
     x_16.select_as_delta();
     cout << "1/(log(2) * x)  = " << 1/(log(2) * x_val) << " : 微分の値 => " << log(2, x_16).dval << endl;
+    x_val = 1;
+    Node x_17(x_val);
+    x_17.select_as_delta();
+    cout << "実験" << " : 微分の値 => " << (exp(5.0 * x_17 * x_17) + 5.0 * x_17 + x_17 * x_17 * x_17).dval << endl;
 }
