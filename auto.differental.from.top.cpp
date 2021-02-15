@@ -90,6 +90,13 @@ class Node {
             return result;
         }
 
+        friend Node operator - (Node left, Node right) {
+            Node result = Node(left.output - right.output);
+            result.setAsInput(left, 1);
+            result.setAsInput(right, -1);
+            return result;
+        }
+
         friend Node operator * (Node left, Node right) {
             Node result = Node(left.output * right.output);
             result.setAsInput(left, right.output);
@@ -97,10 +104,61 @@ class Node {
             return result;
         }
 
+        friend Node operator / (Node left, Node right) {
+            Node result = Node(left.output / right.output);
+            result.setAsInput(left, 1 / right.output);
+            result.setAsInput(right, -1 * left.output / (right.output * right.output));
+            return result;
+        }
+
         // 一般的な関数
         friend Node exp(Node index) {
             Node result = Node(exp(index.output));
             result.setAsInput(index, result.output);
+            return result;
+        }
+
+        friend Node sin(Node x) {
+            Node result = Node(sin(x.output));
+            result.setAsInput(x, cos(x.output));
+            return result;
+        }
+
+        friend Node cos(Node x) {
+            Node result = Node(cos(x.output));
+            result.setAsInput(x, -sin(x.output));
+            return result;
+        }
+
+        friend Node tan(Node x) {
+            Node result = Node(tan(x.output));
+            result.setAsInput(x, 1 / (cos(x.output) * cos(x.output)));
+            return result;
+        }
+
+        friend Node log(Node x) {
+            Node result = Node(log(x.output));
+            result.setAsInput(x, 1 / x.output);
+            return result;
+        }
+
+        friend Node log(ld base, Node x) {
+            Node result = Node(log(x.output) / log(base));
+            result.setAsInput(x, 1 / (x.output * log(base)));
+            return result;
+        }
+
+        friend const Node pow (Node x, Node y) {
+            Node result = Node(pow(x.output, y.output));
+            result.setAsInput(x, y.output * pow(x.output, y.output - 1));
+            result.setAsInput(y, result.output * log(x.output));
+            return result;
+            return Node(pow(rhs.val, lhs.val), pow(rhs.val, lhs.val) * lhs.dval * log(rhs.val) + pow(rhs.val, lhs.val - 1) * lhs.val * rhs.dval);
+        }
+
+        friend Node sqrt(Node x) {
+            Node result = Node(sqrt(x.output));
+            result.setAsInput(x, -1 / (2 * result.output));
             return result;
         }
 };
