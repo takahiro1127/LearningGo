@@ -29,7 +29,9 @@
     "variant": "cpp",
     "chrono": "cpp",
     "limits": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "cmath": "cpp",
+    "complex": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }

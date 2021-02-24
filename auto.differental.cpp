@@ -89,7 +89,7 @@ int main() {
     x_val = PI / 3;
     Node x_3(x_val);
     x_3.select_as_delta();
-    cout << "(cos(x)' = sin(x) "<< sqrt(3)/2 << " : 微分の値 => " << cos(x_3).dval << endl;
+    cout << "(cos(x)' = sin(x) "<< -1 * sqrt(3)/2 << " : 微分の値 => " << cos(x_3).dval << endl;
     x_val_2 = 2 * PI / 3;
     Node x_4(x_val_2);
     x_4.select_as_delta();
@@ -151,7 +151,12 @@ int main() {
     x_16.select_as_delta();
     cout << "1/(log(2) * x)  = " << 1/(log(2) * x_val) << " : 微分の値 => " << log(2, x_16).dval << endl;
     x_val = 1;
+    // Node x_17(x_val);
+    // x_17.select_as_delta();
+    // cout << "実験" << " : 微分の値 => " << (exp(5.0 * x_17 * x_17) + 5.0 * x_17 + x_17 * x_17 * x_17).dval << endl;
+
+    x_val = 3;
     Node x_17(x_val);
     x_17.select_as_delta();
-    cout << "実験" << " : 微分の値 => " << (exp(5.0 * x_17 * x_17) + 5.0 * x_17 + x_17 * x_17 * x_17).dval << endl;
+    cout <<  (exp(-1 * pow(x_17, 2)) * sin(pow(x_17, 2))).dval << endl;
 }
